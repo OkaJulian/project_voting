@@ -1,0 +1,50 @@
+DATABASE PROJECT_VOTING
+
+CREATE DATABASE db_voting;
+USE db_voting;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
+    role ENUM('admin','user'),
+    has_voted TINYINT DEFAULT 0
+);
+
+CREATE TABLE candidates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    vision TEXT,
+    mission TEXT
+);
+
+CREATE TABLE votes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNIQUE,
+    candidate_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, password, role)
+VALUES (
+  'admin',
+  '$2y$10$2pXHT7YkFaBrOVaULodRp.NuF0GwqmjWld3ymXHyhvcQXcyVYQYS2',
+  'admin'
+);
+
+INSERT INTO users (username, password, role)
+VALUES 
+(
+  'user1',
+  '$2y$10$jSVLj6tjtQ5lHeJcm/v6t.tzc27EhdRxQstRf.JXAZnfcMelXi5Di',
+  'user'
+),
+(
+  'user2',
+  '$2y$10$jSVLj6tjtQ5lHeJcm/v6t.tzc27EhdRxQstRf.JXAZnfcMelXi5Di',
+  'user'
+);
+
+
+DELETE FROM users;
+SELECT * FROM users;
